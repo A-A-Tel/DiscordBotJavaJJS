@@ -44,3 +44,4 @@ bin/
 ### IDEA ###
 /.idea
 src/main/java/com/relaxingleg/Token.java
+build.bat

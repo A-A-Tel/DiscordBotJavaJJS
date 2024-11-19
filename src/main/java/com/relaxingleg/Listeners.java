@@ -16,7 +16,7 @@ public class Listeners extends ListenerAdapter {
 
     @Override
     public void onReady(ReadyEvent event) {
-        Guild guild = event.getJDA().getGuildById("1275236533359874079");
+        Guild guild = event.getJDA().getGuildById(1275236533359874079L);
 
         // Calculates the sum of 2 integers (command)
         guild.upsertCommand("sum-of", "Returns the sum of 2 integers.").addOptions(
@@ -29,14 +29,14 @@ public class Listeners extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        Guild guild = event.getJDA().getGuildById("1275236533359874079");
+        Guild guild = event.getGuild();
         MessageChannel channel = event.getChannel();
         Message message = event.getMessage();
         String messageRaw = message.getContentRaw();
 
 
         // Clear meta messages after 30 secs
-        ArrayList<GuildChannel> roleplayChannels = new ArrayList<>(guild.getCategoryById("1287854251376381982").getChannels());
+        ArrayList<GuildChannel> roleplayChannels = new ArrayList<>(guild.getCategoryById(1287854251376381982L).getChannels());
 
         if (roleplayChannels.contains(channel.getId()) && messageRaw.charAt(0) == '(' && messageRaw.charAt(messageRaw.length() - 1) == ')') {
             try {
