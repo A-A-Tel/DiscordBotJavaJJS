@@ -45,6 +45,17 @@ public class Listeners extends ListenerAdapter {
                 throw new RuntimeException(e);
             }
             message.delete().queue();
+            return;
         }
+        // Clear the bot's messages after 10 secs
+        if (message.getAuthor() == guild.getJDA().getUserById(1307829293451182211L)) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        message.delete().queue();
+        return;
     }
 }
