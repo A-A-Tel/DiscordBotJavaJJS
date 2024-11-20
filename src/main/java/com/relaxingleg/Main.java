@@ -1,6 +1,7 @@
 package com.relaxingleg;
 
 import com.relaxingleg.commands.GetSum;
+import com.relaxingleg.commands.TicTacToe;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -11,6 +12,7 @@ public class Main {
         jda.addEventListener(new Listeners());
         CommandManager manager = new CommandManager();
         manager.add(new GetSum());
+        manager.add(new TicTacToe());
         jda.addEventListener(manager);
     }
 }

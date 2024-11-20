@@ -16,4 +16,5 @@ dependencies {
 
 shadowJar {
     archiveBaseName.set('Bot')
+    archiveVersion.set("")
 }
