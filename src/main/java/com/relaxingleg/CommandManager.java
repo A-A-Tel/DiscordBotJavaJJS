@@ -32,7 +32,7 @@ public class CommandManager extends ListenerAdapter {
         }
     }
 
-    public void add (ICommand command) {
+    public void add(ICommand command) {
         commands.add(command);
     }
 }

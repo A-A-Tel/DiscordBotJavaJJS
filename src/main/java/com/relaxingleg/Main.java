@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
         JDA jda = JDABuilder.createDefault(Token.TOKEN).enableIntents(GatewayIntent.MESSAGE_CONTENT).build(); // Token in ignored file, add your token here or do the same as me!
         jda.addEventListener(new Listeners());
-        jda.addEventListener(new CommandManager());
         CommandManager manager = new CommandManager();
         manager.add(new GetSum());
         jda.addEventListener(manager);
