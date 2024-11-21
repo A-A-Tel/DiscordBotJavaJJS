@@ -1,8 +1,7 @@
 import subprocess
 from time import sleep
-from git import Repo
-
-repo_url = "https://github.com/A-A-Tel/DiscordBotJavaJJS"
+import git
+repo = git.Repo("./")
 
 import psutil
 
@@ -21,11 +20,14 @@ while True:
     if not find_bot():
         print("")
         print("")
-        ran = subprocess.run(["build.bat"], capture_output=True, text=True)
+        o = repo.remotes.origin
+        o.pull()
+        sleep(3)
+        ran = subprocess.run(["./gradlew shadowJar"], capture_output=True, text=True)
         print(ran)
         print("")
         print("")
-        ran = subprocess.run(["java", "-jar", "build/libs/Bot-N-all.jar"], capture_output=True, text=True)
+        ran = subprocess.run(["java", "-jar", "./build/libs/Bot-N-all.jar"], capture_output=True, text=True)
         print(ran)
     else:
         print("found")
