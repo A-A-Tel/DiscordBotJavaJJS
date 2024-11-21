@@ -1,5 +1,8 @@
 import subprocess
 from time import sleep
+from git import Repo
+
+repo_url = "https://github.com/A-A-Tel/DiscordBotJavaJJS"
 
 import psutil
 
@@ -22,7 +25,7 @@ while True:
         print(ran)
         print("")
         print("")
-        ran = subprocess.run(["java", "-jar", "D:/Personal/Discord/DiscordBotJavaJJS/build/libs/Bot-N-all.jar"], capture_output=True, text=True)
+        ran = subprocess.run(["java", "-jar", "build/libs/Bot-N-all.jar"], capture_output=True, text=True)
         print(ran)
     else:
         print("found")
