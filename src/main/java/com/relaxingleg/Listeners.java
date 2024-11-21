@@ -17,6 +17,8 @@ public class Listeners extends ListenerAdapter {
         assert guild != null;
 
         guild.loadMembers();
+
+        guild.getTextChannelById(1309135463533121638L).sendMessage("Online").queue();
     }
 
     @Override
