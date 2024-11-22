@@ -2,6 +2,7 @@ package com.relaxingleg.commands;
 
 import com.relaxingleg.ICommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
@@ -26,6 +27,11 @@ public class GetSum implements ICommand {
         data.add(new OptionData(OptionType.INTEGER, "number-1", "First Number", true));
         data.add(new OptionData(OptionType.INTEGER, "number-2", "Second Number", true));
         return data;
+    }
+
+    @Override
+    public DefaultMemberPermissions permission() {
+        return DefaultMemberPermissions.ENABLED;
     }
 
     @Override
