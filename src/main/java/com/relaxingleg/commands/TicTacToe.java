@@ -34,14 +34,15 @@ public class TicTacToe implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
+        event.reply("Started").queue();
         MessageChannel channel = event.getChannel();
         channel.sendMessage("""
-                
+                Game:
                 1️⃣2️⃣3️⃣
                 4️⃣5️⃣6️⃣
                 7️⃣8️⃣9️⃣""").queue();
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
