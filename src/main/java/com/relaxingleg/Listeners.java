@@ -42,5 +42,6 @@ public class Listeners extends ListenerAdapter {
 
         // Run when a message is sent.
         AutoRun.updateStats();
+        AutoRun.bannedWordsCheck(message);
     }
 }

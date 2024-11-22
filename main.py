@@ -1,9 +1,8 @@
+import git
+import psutil
 import subprocess
 from time import sleep
-import git
 repo = git.Repo("./")
-
-import psutil
 
 
 def find_bot():
@@ -14,7 +13,6 @@ def find_bot():
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             continue
     return False
-
 
 while True:
     if not find_bot():
