@@ -9,8 +9,8 @@ application {
 }
 
 shadowJar {
-    archiveBaseName.set('Bot')
-    archiveVersion.set("N")
+    archiveBaseName.set('The')
+    archiveVersion.set("Ghost")
 }
 
 group = 'com.relaxingleg'
