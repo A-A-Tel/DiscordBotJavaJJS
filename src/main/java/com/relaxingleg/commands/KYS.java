@@ -14,7 +14,7 @@ public class KYS implements ICommand {
 
     @Override
     public String getDescription() {
-        return "kills the bot and restarts it (if the python script doesn't fail)";
+        return "Kills the bot";
     }
 
     @Override
@@ -24,7 +24,6 @@ public class KYS implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        event.reply("Man I'm dead! (I'll be back soon give me like a minute)").queue();
         System.exit(0);
     }
 }
