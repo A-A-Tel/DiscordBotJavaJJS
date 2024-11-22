@@ -20,7 +20,6 @@ while True:
         print("")
         o = repo.remotes.origin
         o.pull()
-        sleep(3)
         ran = subprocess.run(["gradlew.bat", "shadowJar"], capture_output=True, text=True)
         print(ran)
         print("")
@@ -29,4 +28,3 @@ while True:
         print(ran)
     else:
         print("found")
-        sleep(500)
