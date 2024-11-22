@@ -23,7 +23,7 @@ while True:
         o = repo.remotes.origin
         o.pull()
         sleep(3)
-        ran = subprocess.run(["./gradlew shadowJar"], capture_output=True, text=True)
+        ran = subprocess.run(["gradlew.bat", "shadowJar"], capture_output=True, text=True)
         print(ran)
         print("")
         print("")
