@@ -20,7 +20,7 @@ public class AutoRun {
     }
 
     //Banned words get deleted
-    public static String[] bannedWords = {"nigger", "nigga", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr"};
+    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr"};
 
 
     public static boolean isVowel(char c) {
@@ -65,12 +65,6 @@ public class AutoRun {
                 }
             }
         }
-        for (int i = 0; i < messageRaw.length() - 1; i++) {
-            if (!(isVowel(messageRaw.charAt(i)))) {
-
-            }
-        }
-
         for (String banned : bannedWords) {
             if (messageRaw.toString().toLowerCase().contains(banned)) {
                 message.delete().queue();
