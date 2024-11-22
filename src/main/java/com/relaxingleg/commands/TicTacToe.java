@@ -42,7 +42,7 @@ public class TicTacToe implements ICommand {
                 4️⃣5️⃣6️⃣
                 7️⃣8️⃣9️⃣""").queue();
         try {
-            Thread.sleep(1000);
+            wait(500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
