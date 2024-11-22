@@ -41,14 +41,5 @@ public class TicTacToe implements ICommand {
                 1️⃣2️⃣3️⃣
                 4️⃣5️⃣6️⃣
                 7️⃣8️⃣9️⃣""").queue();
-        try {
-            wait(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        long messageId = channel.getLatestMessageIdLong();
-        channel.editMessageById(messageId, "Ballala").queue();
-        channel.sendMessage(messageId + "").queue();
-        channel.sendMessage("wqewfw").queue();
     }
 }
