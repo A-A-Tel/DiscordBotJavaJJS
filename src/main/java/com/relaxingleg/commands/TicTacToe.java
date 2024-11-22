@@ -30,6 +30,9 @@ public class TicTacToe implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        event.reply("Test").queue();
+        event.getChannel().sendMessage("""
+                1️⃣2️⃣3️⃣
+                4️⃣5️⃣6️⃣
+                7️⃣8️⃣9️⃣""").queue();
     }
 }
