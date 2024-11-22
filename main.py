@@ -31,4 +31,4 @@ while True:
         print(ran)
     else:
         print("found")
-    sleep(10)
+        sleep(500)
