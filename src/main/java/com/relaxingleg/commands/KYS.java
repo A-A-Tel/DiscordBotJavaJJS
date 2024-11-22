@@ -24,7 +24,7 @@ public class KYS implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        event.reply("Main I'm dead").queue();
+        event.reply("Man I'm dead! (I'll be back soon give me like a minute)").queue();
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
