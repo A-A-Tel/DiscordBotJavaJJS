@@ -48,5 +48,6 @@ public class TicTacToe implements ICommand {
         }
         long messageId = channel.getLatestMessageIdLong();
         channel.editMessageById(messageId, "Ballala").queue();
+        channel.sendMessage(messageId + "").queue();
     }
 }
