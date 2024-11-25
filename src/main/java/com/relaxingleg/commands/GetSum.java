@@ -39,6 +39,6 @@ public class GetSum implements ICommand {
         int num1 = event.getOption("number-1").getAsInt();
         int num2 = event.getOption("number-2").getAsInt();
 
-        event.reply("The sum is: " + (num1 + num2)).queue();
+        event.reply("The sum is just: " + (num1 + num2)).queue();
     }
 }
