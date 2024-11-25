@@ -20,7 +20,7 @@ public class AutoRun {
     }
 
     //Banned words get deleted
-    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr"};
+    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr", "negaw"};
 
 
     public static boolean isVowel(char c) {
