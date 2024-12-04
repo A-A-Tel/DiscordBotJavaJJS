@@ -29,66 +29,41 @@ public class AutoRun {
 
 
     public void bannedWordsCheck(Message message) {
+        String rawContent = message.getContentRaw();
 
-        StringBuilder messageRaw = new StringBuilder();
+        // Check for non-standard fonts
+        boolean hasNonStandardFont = rawContent.chars().anyMatch(ch -> ch < 32 || ch > 126);
+        if (hasNonStandardFont) {
+            message.delete().queue();
+            return;
+        }
 
-        for (int i = 0; i < message.getContentRaw().length(); i++) {
-
-            boolean hasNonStandardFont = messageRaw.chars().anyMatch(ch -> ch < 32 || ch > 126);
-
-            if (hasNonStandardFont) {
-                message.delete().queue();
-            }
-
-            if (Character.isAlphabetic(message.getContentRaw().charAt(i))) {
-                messageRaw.append(message.getContentRaw().charAt(i));
-
-            } else if (Character.isDigit(message.getContentRaw().charAt(i))) {
-                switch (message.getContentRaw().charAt(i)) {
-                    case '1':
-                        messageRaw.append('i');
-                        break;
-                    case '2':
-                        messageRaw.append('z');
-                        break;
-                    case '3':
-                        messageRaw.append('e');
-                        break;
-                    case '4':
-                        messageRaw.append('a');
-                        break;
-                    case '5':
-                        messageRaw.append('s');
-                        break;
-                    case '7':
-                        messageRaw.append('l');
-                        break;
-                    case '8':
-                        messageRaw.append('b');
-                        break;
-                    case '6', '9':
-                        messageRaw.append('g');
-                        break;
-                    case '0':
-                        messageRaw.append('o');
-                        break;
+        // Normalize the message
+        StringBuilder normalizedMessage = new StringBuilder();
+        for (char ch : rawContent.toCharArray()) {
+            if (Character.isAlphabetic(ch)) {
+                normalizedMessage.append(ch);
+            } else if (Character.isDigit(ch)) {
+                switch (ch) {
+                    case '1' -> normalizedMessage.append('i');
+                    case '2' -> normalizedMessage.append('z');
+                    case '3' -> normalizedMessage.append('e');
+                    case '4' -> normalizedMessage.append('a');
+                    case '5' -> normalizedMessage.append('s');
+                    case '7' -> normalizedMessage.append('l');
+                    case '8' -> normalizedMessage.append('b');
+                    case '6', '9' -> normalizedMessage.append('g');
+                    case '0' -> normalizedMessage.append('o');
                 }
             }
         }
-        boolean hasBadWorld = false;
+
         for (String banned : bannedWords) {
-            if (messageRaw.toString().toLowerCase().contains(banned)) {
+            if (normalizedMessage.toString().toLowerCase().contains(banned)) {
                 message.delete().queue();
-                hasBadWorld = true;
                 return;
             }
         }
-        if (!hasBadWorld) {
-
-        }
-
-
-        // Leveling system when a message is not bad
-
     }
 }
+
