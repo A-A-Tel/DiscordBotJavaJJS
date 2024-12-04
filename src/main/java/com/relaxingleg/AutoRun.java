@@ -5,10 +5,10 @@ import net.dv8tion.jda.api.entities.Message;
 
 public class AutoRun {
     // These two should have the same length!
-    public static long[] statChannelList = {1309143428939911258L, 1309143461391237262L, 1309211315629199481L};
-    public static long[] statRolesList = {1309134466769485824L, 1309134643517460562L, 1309137530657964033L};
+    public long[] statChannelList = {1309143428939911258L, 1309143461391237262L, 1309211315629199481L};
+    public long[] statRolesList = {1309134466769485824L, 1309134643517460562L, 1309137530657964033L};
 
-    public static void updateStats() {
+    public void updateStats() {
         Guild guild = Main.jda.getGuildById(1308043773405827155L);
         assert guild != null;
 
@@ -20,7 +20,7 @@ public class AutoRun {
     }
 
     //Banned words get deleted
-    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr", "negaw"};
+    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr", "negaw", "\uD835"};
 
 
     public static boolean isVowel(char c) {
@@ -28,11 +28,15 @@ public class AutoRun {
     }
 
 
-    public static void bannedWordsCheck(Message message) {
+    public void bannedWordsCheck(Message message) {
+
         StringBuilder messageRaw = new StringBuilder();
+
         for (int i = 0; i < message.getContentRaw().length(); i++) {
+
             if (Character.isAlphabetic(message.getContentRaw().charAt(i))) {
                 messageRaw.append(message.getContentRaw().charAt(i));
+
             } else if (Character.isDigit(message.getContentRaw().charAt(i))) {
                 switch (message.getContentRaw().charAt(i)) {
                     case '1':
@@ -65,11 +69,20 @@ public class AutoRun {
                 }
             }
         }
+        boolean hasBadWorld = false;
         for (String banned : bannedWords) {
             if (messageRaw.toString().toLowerCase().contains(banned)) {
                 message.delete().queue();
+                hasBadWorld = true;
                 return;
             }
         }
+        if (!hasBadWorld) {
+
+        }
+
+
+        // Leveling system when a message is not bad
+
     }
 }

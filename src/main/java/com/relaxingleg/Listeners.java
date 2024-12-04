@@ -23,6 +23,9 @@ public class Listeners extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+
+        AutoRun run = new AutoRun();
+
         Guild guild = Main.jda.getGuildById(1308043773405827155L);
         MessageChannel channel = event.getChannel();
         Message message = event.getMessage();
@@ -41,7 +44,7 @@ public class Listeners extends ListenerAdapter {
         }
 
         // Run when a message is sent.
-        AutoRun.updateStats();
-        AutoRun.bannedWordsCheck(message);
+        run.updateStats();
+        run.bannedWordsCheck(message);
     }
 }
