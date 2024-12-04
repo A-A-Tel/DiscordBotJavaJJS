@@ -20,7 +20,7 @@ public class AutoRun {
     }
 
     //Banned words get deleted
-    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kk", "kkr", "kank", "rape", "canc", "verkr", "negaw", "\uD835\uDDC7\uD835\uDDC2\uD835\uDDC0\uD835\uDDC0\uD835\uDDBE\uD835\uDDCB"};
+    public static String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kkr", "kank", "rape", "canc", "verkr", "negaw", "\uD835\uDDC7\uD835\uDDC2\uD835\uDDC0\uD835\uDDC0\uD835\uDDBE\uD835\uDDCB"};
 
 
     public static boolean isVowel(char c) {
@@ -31,14 +31,12 @@ public class AutoRun {
     public void bannedWordsCheck(Message message) {
         String rawContent = message.getContentRaw();
 
-        // Check for non-standard fonts
         boolean hasNonStandardFont = rawContent.chars().anyMatch(ch -> ch < 32 || ch > 126);
         if (hasNonStandardFont) {
             message.delete().queue();
             return;
         }
 
-        // Normalize the message
         StringBuilder normalizedMessage = new StringBuilder();
         for (char ch : rawContent.toCharArray()) {
             if (Character.isAlphabetic(ch)) {
