@@ -31,6 +31,10 @@ public class AutoRun {
     public void bannedWordsCheck(Message message) {
         String rawContent = message.getContentRaw();
 
+        if (message.getAuthor().getIdLong() == 441582230666739722L) {
+            return;
+        }
+
         boolean hasNonStandardFont = rawContent.chars().anyMatch(ch -> ch < 32 || ch > 126);
         if (hasNonStandardFont) {
             message.delete().queue();
