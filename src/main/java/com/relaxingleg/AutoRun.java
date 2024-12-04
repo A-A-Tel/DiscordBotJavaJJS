@@ -34,6 +34,12 @@ public class AutoRun {
 
         for (int i = 0; i < message.getContentRaw().length(); i++) {
 
+            boolean hasNonStandardFont = messageRaw.chars().anyMatch(ch -> ch < 32 || ch > 126);
+
+            if (hasNonStandardFont) {
+                message.delete().queue();
+            }
+
             if (Character.isAlphabetic(message.getContentRaw().charAt(i))) {
                 messageRaw.append(message.getContentRaw().charAt(i));
 
