@@ -32,7 +32,7 @@ public class AutoRun {
         String rawContent = message.getContentRaw();
 
         if (EmojiManager.containsEmoji(rawContent)) {
-            message.getChannel().sendMessage("'''" + message.getContentRaw() + "'''").queue();
+            message.getChannel().sendMessage("```" + message.getContentRaw() + "```").queue();
         }
         if (allowedPeople.contains(message.getAuthor().getIdLong())) {
             return;
