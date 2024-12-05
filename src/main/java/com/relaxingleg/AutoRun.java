@@ -29,16 +29,16 @@ public class AutoRun {
 
     public void bannedWordsCheck(Message message) {
 
-        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
-            return;
-        }
-
-
         String rawContent = message.getContentRaw();
 
         if (EmojiManager.containsEmoji(rawContent)) {
             message.getChannel().sendMessage("'''" + message.getContentRaw() + "'''").queue();
         }
+        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
+            return;
+        }
+
+
 
         StringBuilder normalizedMessage = new StringBuilder();
         Map<Character, Character> leetSpeakMap = Map.of(
