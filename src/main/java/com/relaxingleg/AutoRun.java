@@ -44,9 +44,9 @@ public class AutoRun {
         String rawContent = message.getContentRaw();
 
         // Skip check for allowed people
-        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
-            return;
-        }
+//        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
+//            return;
+//        }
 
         boolean hasNonStandardFont = rawContent.chars()
                 .anyMatch(ch -> (ch < 32 || ch > 126) && !isEmoji(ch));
@@ -80,7 +80,6 @@ public class AutoRun {
             rawContent = rawContent.replace(attachment.getFileName(), "");
         }
 
-        // Check for banned words
         for (String banned : bannedWords) {
             if (normalizedMessage.toString().toLowerCase().contains(banned)) {
                 message.delete().queue();
