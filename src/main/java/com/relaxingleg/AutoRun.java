@@ -31,11 +31,27 @@ public class AutoRun {
 
     public List<Long> allowedPeople = Arrays.asList(441582230666739722L, 955175684093911071L, 510899779354492950L, 1313781740413779980L, 1307829293451182211L);
 
+    private boolean isEmoji(int codePoint) {
+        return (codePoint >= 0x1F600 && codePoint <= 0x1F64F) ||  // Emoticons
+                (codePoint >= 0x1F300 && codePoint <= 0x1F5FF) || // Miscellaneous Symbols and Pictographs
+                (codePoint >= 0x1F680 && codePoint <= 0x1F6FF) || // Transport and Map Symbols
+                (codePoint >= 0x1F900 && codePoint <= 0x1F9FF) || // Supplemental Symbols and Pictographs
+                (codePoint >= 0x2600 && codePoint <= 0x26FF) ||   // Miscellaneous Symbols
+                (codePoint >= 0x2700 && codePoint <= 0x27BF);     // Dingbats
+    }
+
     public void bannedWordsCheck(Message message) {
         String rawContent = message.getContentRaw();
 
         // Skip check for allowed people
-        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
+//        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
+//            return;
+//        }
+
+        boolean hasNonStandardFont = rawContent.chars()
+                .anyMatch(ch -> (ch < 32 || ch > 126) && !isEmoji(ch));
+        if (hasNonStandardFont) {
+            message.delete().queue();
             return;
         }
 
@@ -46,17 +62,16 @@ public class AutoRun {
                 '9', 'g', '0', 'o'
         );
 
-        // Unicode emoji ranges
-        Set<Integer> emojiRanges = Set.of(
-                0x1F600, 0x1F64F  // Emoticons
-        );
-
         for (char ch : rawContent.toCharArray()) {
+            int codePoint = Character.codePointAt(new char[]{ch}, 0);
+
             if (Character.isAlphabetic(ch)) {
                 normalizedMessage.append(ch);
-            } else if (Character.isDigit(ch)) {
+            }
+            else if (Character.isDigit(ch)) {
                 normalizedMessage.append(leetSpeakMap.getOrDefault(ch, ch));
-            } else if (emojiRanges.contains(Character.codePointAt(new char[]{ch}, 0))) {
+            }
+            else if (isEmoji(codePoint)) {
                 normalizedMessage.append(ch);
             }
         }
