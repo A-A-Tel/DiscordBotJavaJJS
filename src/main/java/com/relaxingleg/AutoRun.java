@@ -76,6 +76,10 @@ public class AutoRun {
             }
         }
 
+        for (Message.Attachment attachment : message.getAttachments()) {
+            rawContent = rawContent.replace(attachment.getFileName(), "");
+        }
+
         // Check for banned words
         for (String banned : bannedWords) {
             if (normalizedMessage.toString().toLowerCase().contains(banned)) {
