@@ -20,18 +20,17 @@ public class AutoRun {
     }
 
     //Banned words get deleted
-    public String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kkr", "kank", "rape", "canc", "verkr", "negaw", "\uD835\uDDC7\uD835\uDDC2\uD835\uDDC0\uD835\uDDC0\uD835\uDDBE\uD835\uDDCB"};
+    public String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kkr", "kank", "rape", "canc", "verkr", "negaw"};
 
 
     public boolean isVowel(char c) {
         return c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U';
     }
 
-    public long[] allowedPeople = {441582230666739722L, 955175684093911071L, 510899779354492950L};
+    public long[] allowedPeople = {441582230666739722L, 955175684093911071L, 510899779354492950L, 1313781740413779980L, 1307829293451182211L};
 
     public void bannedWordsCheck(Message message) {
         String rawContent = message.getContentRaw();
-
 
         for (long person : allowedPeople) {
             if (message.getAuthor().getIdLong() == person) {
