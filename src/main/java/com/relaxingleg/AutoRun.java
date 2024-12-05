@@ -44,9 +44,9 @@ public class AutoRun {
         String rawContent = message.getContentRaw();
 
         // Skip check for allowed people
-//        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
-//            return;
-//        }
+        if (allowedPeople.contains(message.getAuthor().getIdLong())) {
+            return;
+        }
 
         for (Message.Attachment attachment : message.getAttachments()) {
             rawContent = rawContent.replace(attachment.getFileName(), "");
@@ -72,7 +72,7 @@ public class AutoRun {
                 normalizedMessage.append(ch);
             }
         }
-        
+
         boolean hasNonStandardFont = rawContent.chars()
                 .anyMatch(ch -> (ch < 32 || ch > 126) && !isEmoji(ch));
         if (hasNonStandardFont) {
