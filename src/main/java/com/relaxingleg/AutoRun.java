@@ -39,7 +39,6 @@ public class AutoRun {
             return;
         }
 
-        // Normalize message content, allowing emojis
         StringBuilder normalizedMessage = new StringBuilder();
         Map<Character, Character> leetSpeakMap = Map.of(
                 '1', 'i', '2', 'z', '3', 'e', '4', 'a',
@@ -49,12 +48,7 @@ public class AutoRun {
 
         // Unicode emoji ranges
         Set<Integer> emojiRanges = Set.of(
-                0x1F600, 0x1F64F,  // Emoticons
-                0x1F300, 0x1F5FF,  // Miscellaneous Symbols and Pictographs
-                0x1F680, 0x1F6FF,  // Transport and Map Symbols
-                0x1F900, 0x1F9FF,  // Supplemental Symbols and Pictographs
-                0x2600, 0x26FF,    // Miscellaneous Symbols
-                0x2700, 0x27BF     // Dingbats
+                0x1F600, 0x1F64F  // Emoticons
         );
 
         for (char ch : rawContent.toCharArray()) {
