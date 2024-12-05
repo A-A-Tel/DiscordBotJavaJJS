@@ -48,11 +48,8 @@ public class AutoRun {
 //            return;
 //        }
 
-        boolean hasNonStandardFont = rawContent.chars()
-                .anyMatch(ch -> (ch < 32 || ch > 126) && !isEmoji(ch));
-        if (hasNonStandardFont) {
-            message.delete().queue();
-            return;
+        for (Message.Attachment attachment : message.getAttachments()) {
+            rawContent = rawContent.replace(attachment.getFileName(), "");
         }
 
         StringBuilder normalizedMessage = new StringBuilder();
@@ -75,9 +72,12 @@ public class AutoRun {
                 normalizedMessage.append(ch);
             }
         }
-
-        for (Message.Attachment attachment : message.getAttachments()) {
-            rawContent = rawContent.replace(attachment.getFileName(), "");
+        
+        boolean hasNonStandardFont = rawContent.chars()
+                .anyMatch(ch -> (ch < 32 || ch > 126) && !isEmoji(ch));
+        if (hasNonStandardFont) {
+            message.delete().queue();
+            return;
         }
 
         for (String banned : bannedWords) {
