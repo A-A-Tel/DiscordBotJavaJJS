@@ -1,5 +1,7 @@
 package com.relaxingleg;
 
+import com.vdurmont.emoji.Emoji;
+import com.vdurmont.emoji.EmojiManager;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 
@@ -21,35 +23,21 @@ public class AutoRun {
         }
     }
 
-    //Banned words get deleted
     public String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kkr", "kank", "rape", "canc", "verkr", "negaw"};
-
-
-    public boolean isVowel(char c) {
-        return c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U';
-    }
 
     public List<Long> allowedPeople = Arrays.asList(441582230666739722L, 955175684093911071L, 510899779354492950L, 1313781740413779980L, 1307829293451182211L);
 
-    private boolean isEmoji(int codePoint) {
-        return (codePoint >= 0x1F600 && codePoint <= 0x1F64F) ||  // Emoticons
-                (codePoint >= 0x1F300 && codePoint <= 0x1F5FF) || // Miscellaneous Symbols and Pictographs
-                (codePoint >= 0x1F680 && codePoint <= 0x1F6FF) || // Transport and Map Symbols
-                (codePoint >= 0x1F900 && codePoint <= 0x1F9FF) || // Supplemental Symbols and Pictographs
-                (codePoint >= 0x2600 && codePoint <= 0x26FF) ||   // Miscellaneous Symbols
-                (codePoint >= 0x2700 && codePoint <= 0x27BF);     // Dingbats
-    }
-
     public void bannedWordsCheck(Message message) {
-        String rawContent = message.getContentRaw();
 
-        // Skip check for allowed people
         if (allowedPeople.contains(message.getAuthor().getIdLong())) {
             return;
         }
 
-        for (Message.Attachment attachment : message.getAttachments()) {
-            rawContent = rawContent.replace(attachment.getFileName(), "");
+
+        String rawContent = message.getContentRaw();
+
+        if (EmojiManager.containsEmoji(rawContent)) {
+            message.getChannel().sendMessage("'''" + message.getContentRaw() + "'''").queue();
         }
 
         StringBuilder normalizedMessage = new StringBuilder();
@@ -59,27 +47,23 @@ public class AutoRun {
                 '9', 'g', '0', 'o'
         );
 
-        for (char ch : rawContent.toCharArray()) {
-            int codePoint = Character.codePointAt(new char[]{ch}, 0);
+        for (Message.Attachment attachment : message.getAttachments()) {
+            rawContent = rawContent.replace(attachment.getFileName(), "");
+        }
 
+
+        // Remove non-alphabetic/digital characters
+        for (char ch : rawContent.toCharArray()) {
             if (Character.isAlphabetic(ch)) {
                 normalizedMessage.append(ch);
             }
             else if (Character.isDigit(ch)) {
                 normalizedMessage.append(leetSpeakMap.getOrDefault(ch, ch));
             }
-            else if (isEmoji(codePoint)) {
-                normalizedMessage.append(ch);
-            }
         }
 
-        boolean hasNonStandardFont = rawContent.chars()
-                .anyMatch(ch -> (ch < 32 || ch > 126) && !isEmoji(ch));
-        if (hasNonStandardFont) {
-            message.delete().queue();
-            return;
-        }
 
+        // Delete the possible banned message
         for (String banned : bannedWords) {
             if (normalizedMessage.toString().toLowerCase().contains(banned)) {
                 message.delete().queue();
