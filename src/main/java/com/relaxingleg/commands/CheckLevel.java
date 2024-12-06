@@ -39,7 +39,7 @@ public class CheckLevel implements ICommand {
             for (LeveledUser user : LevelingMain.leveledUsers) {
                 if (user.getMemberId() == event.getUser().getIdLong()) {
                     event.getChannel().sendMessage("Your level is: " + user.getLevel() + " and have " +
-                            + user.getMessagesUntilLevelUp() + "messages remaining.").queue();
+                            + user.getMessagesUntilLevelUp() + " messages remaining.").queue();
                     return;
                 }
             }
@@ -48,7 +48,7 @@ public class CheckLevel implements ICommand {
                 if (user.getMemberId() == event.getOption("user").getAsUser().getIdLong()) {
                     event.getChannel().sendMessage(event.getOption("user").getAsUser().getAsMention()
                             + "'s level is: " + user.getLevel() + " and has " + user.getMessagesUntilLevelUp()
-                            + "messages remaining.").queue();
+                            + " messages remaining.").queue();
                     return;
                 }
             }
