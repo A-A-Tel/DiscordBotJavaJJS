@@ -1,5 +1,6 @@
 package com.relaxingleg;
 
+import com.relaxingleg.commands.CheckLevel;
 import com.relaxingleg.commands.GetSum;
 import com.relaxingleg.commands.KYS;
 import com.relaxingleg.commands.TicTacToe;
@@ -22,6 +23,7 @@ public class Main {
         manager.add(new GetSum());
         manager.add(new TicTacToe());
         manager.add(new KYS());
+        manager.add(new CheckLevel());
         jda.addEventListener(manager);
     }
 }
