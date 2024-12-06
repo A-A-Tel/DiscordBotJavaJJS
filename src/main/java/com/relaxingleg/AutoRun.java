@@ -23,10 +23,10 @@ public class AutoRun {
     }
 
     public String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kkr", "kank", "rape",
-                                   "canc", "verkr", "negaw", "rapi"};
+            "canc", "verkr", "negaw", "rapi"};
 
     public List<Long> allowedPeople = Arrays.asList(441582230666739722L, 955175684093911071L, 510899779354492950L,
-                                                    1313781740413779980L, 1307829293451182211L, 712650301542498304L);
+            1313781740413779980L, 1307829293451182211L, 712650301542498304L);
 
     public String[] letterEmojis = {
             // Regional Indicators
@@ -58,6 +58,7 @@ public class AutoRun {
         }
 
 
+        // This unreadable piece of crap removes all emojis from the parsed message that converted the tags into emojis
         String rawContent = EmojiParser.removeAllEmojis(EmojiParser.parseToUnicode(message.getContentRaw()));
 
         StringBuilder normalizedMessage = new StringBuilder();
