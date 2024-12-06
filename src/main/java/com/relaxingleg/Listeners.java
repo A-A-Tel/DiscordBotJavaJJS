@@ -14,13 +14,13 @@ public class Listeners extends ListenerAdapter {
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-//        Guild guild = Main.jda.getGuildById(1308043773405827155L);
-//
-//        assert guild != null;
-//
-//        guild.loadMembers();
-//
-//        guild.getTextChannelById(1309135463533121638L).sendMessage("Online").queue();
+        Guild guild = Main.jda.getGuildById(1308043773405827155L);
+
+        assert guild != null;
+
+        guild.loadMembers();
+
+        guild.getTextChannelById(1309135463533121638L).sendMessage("Online").queue();
 
         for (Emoji emoji : EmojiManager.getAll()) {
             System.out.println(emoji.getAliases());
@@ -50,7 +50,7 @@ public class Listeners extends ListenerAdapter {
         }
 
         // Run when a message is sent.
-//        run.updateStats();
+        run.updateStats();
         run.bannedWordsCheck(message);
     }
 }
