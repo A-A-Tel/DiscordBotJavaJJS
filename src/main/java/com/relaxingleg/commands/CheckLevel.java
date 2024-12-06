@@ -38,7 +38,7 @@ public class CheckLevel implements ICommand {
         if (event.getOption("user") == null) {
             for (LeveledUser user : LevelingMain.leveledUsers) {
                 if (user.getMemberId() == event.getUser().getIdLong()) {
-                    event.getChannel().sendMessage("Your level is: " + user.getLevel() + "and have" +
+                    event.getChannel().sendMessage("Your level is: " + user.getLevel() + " and have " +
                             + user.getMessagesUntilLevelUp() + "messages remaining.").queue();
                     return;
                 }
