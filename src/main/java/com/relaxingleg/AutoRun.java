@@ -12,16 +12,16 @@ public class AutoRun {
     public long[] statChannelList = {1309143428939911258L, 1309143461391237262L, 1309211315629199481L};
     public long[] statRolesList = {1309134466769485824L, 1309134643517460562L, 1309137530657964033L};
 
-    public void updateStats() {
-        Guild guild = Main.jda.getGuildById(1308043773405827155L);
-        assert guild != null;
-
-        for (int i = 0; i < statChannelList.length; i++) {
-            guild.getVoiceChannelById(statChannelList[i]).getManager()
-                    .setName(guild.getRoleById(statRolesList[i]).getName() + ": " +
-                            guild.getMembersWithRoles(guild.getRoleById(statRolesList[i])).size()).queue();
-        }
-    }
+//    public void updateStats() {
+//        Guild guild = Main.jda.getGuildById(1308043773405827155L);
+//        assert guild != null;
+//
+//        for (int i = 0; i < statChannelList.length; i++) {
+//            guild.getVoiceChannelById(statChannelList[i]).getManager()
+//                    .setName(guild.getRoleById(statRolesList[i]).getName() + ": " +
+//                            guild.getMembersWithRoles(guild.getRoleById(statRolesList[i])).size()).queue();
+//        }
+//    }
 
     public String[] bannedWords = {"nigger", "nigga", "niggs", "nigs", "negro", "kkr", "kank", "rape", "canc", "verkr", "negaw"};
 
@@ -31,14 +31,9 @@ public class AutoRun {
 
         String rawContent = message.getContentRaw();
 
-        if (EmojiManager.containsEmoji(rawContent)) {
-            message.getChannel().sendMessage("```" + message.getContentRaw() + "```").queue();
-        }
         if (allowedPeople.contains(message.getAuthor().getIdLong())) {
             return;
         }
-
-
 
         StringBuilder normalizedMessage = new StringBuilder();
         Map<Character, Character> leetSpeakMap = Map.of(

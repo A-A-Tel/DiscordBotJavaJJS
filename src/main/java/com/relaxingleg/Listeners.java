@@ -1,5 +1,7 @@
 package com.relaxingleg;
 
+import com.vdurmont.emoji.Emoji;
+import com.vdurmont.emoji.EmojiManager;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -12,13 +14,17 @@ public class Listeners extends ListenerAdapter {
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-        Guild guild = Main.jda.getGuildById(1308043773405827155L);
+//        Guild guild = Main.jda.getGuildById(1308043773405827155L);
+//
+//        assert guild != null;
+//
+//        guild.loadMembers();
+//
+//        guild.getTextChannelById(1309135463533121638L).sendMessage("Online").queue();
 
-        assert guild != null;
-
-        guild.loadMembers();
-
-        guild.getTextChannelById(1309135463533121638L).sendMessage("Online").queue();
+        for (Emoji emoji : EmojiManager.getAll()) {
+            System.out.println(emoji.getAliases());
+        }
     }
 
     @Override
@@ -44,7 +50,7 @@ public class Listeners extends ListenerAdapter {
         }
 
         // Run when a message is sent.
-        run.updateStats();
+//        run.updateStats();
         run.bannedWordsCheck(message);
     }
 }
