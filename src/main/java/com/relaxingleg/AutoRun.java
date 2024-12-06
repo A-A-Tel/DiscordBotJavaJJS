@@ -1,7 +1,5 @@
 package com.relaxingleg;
 
-import com.vdurmont.emoji.Emoji;
-import com.vdurmont.emoji.EmojiManager;
 import com.vdurmont.emoji.EmojiParser;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
@@ -28,13 +26,36 @@ public class AutoRun {
 
     public List<Long> allowedPeople = Arrays.asList(441582230666739722L, 955175684093911071L, 510899779354492950L, 1313781740413779980L, 1307829293451182211L);
 
+    String[] letterEmojis = {
+            // Regional Indicators
+            "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯",
+            "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹",
+            "🇺", "🇻", "🇼", "🇽", "🇾", "🇿",
+
+            // Single-Letter Emojis
+            "🅰️", "🅱️", "🆎", "🆑", "🅾️", "ℹ️", "🔤", "🔠", "🔡"
+    };
+
     public void bannedWordsCheck(Message message) {
 
         if (allowedPeople.contains(message.getAuthor().getIdLong())) {
             return;
         }
 
-        // This unreadable piece of crap removes all the emojis
+        List<String> possibleEmojis = EmojiParser.extractEmojis(EmojiParser.parseToUnicode(message.getContentRaw()));
+
+        if (!possibleEmojis.isEmpty()) {
+            for (String emoji : possibleEmojis) {
+                for (String banned : letterEmojis) {
+                    if (emoji.equals(banned)) {
+                        message.delete().queue();
+                        return;
+                    }
+                }
+            }
+        }
+
+
         String rawContent = EmojiParser.removeAllEmojis(EmojiParser.parseToUnicode(message.getContentRaw()));
 
         StringBuilder normalizedMessage = new StringBuilder();
