@@ -23,7 +23,7 @@ public class CheckLevel implements ICommand {
 
     @Override
     public List<OptionData> getOptions() {
-        return List.of(new OptionData(OptionType.USER, "user", "Specify a user", false));
+        return List.of(new OptionData(OptionType.MENTIONABLE, "user", "Specify a user", false));
     }
 
     @Override
@@ -33,6 +33,7 @@ public class CheckLevel implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
+        event.reply("Seeking...").queue();
 
         if (event.getOption("user") == null) {
             for (LeveledUser user : LevelingMain.leveledUsers) {
@@ -44,7 +45,7 @@ public class CheckLevel implements ICommand {
         } else {
             for (LeveledUser user : LevelingMain.leveledUsers) {
                 if (user.getMemberId() == event.getOption("user").getAsUser().getIdLong()) {
-                    event.getChannel().sendMessage(event.getOption("user") + "'s level is: " + user.getLevel()).queue();
+                    event.getChannel().sendMessage(event.getOption("user").getAsUser().getAsMention() + "'s level is: " + user.getLevel()).queue();
                     return;
                 }
             }
