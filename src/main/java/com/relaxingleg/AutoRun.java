@@ -2,6 +2,7 @@ package com.relaxingleg;
 
 import com.vdurmont.emoji.Emoji;
 import com.vdurmont.emoji.EmojiManager;
+import com.vdurmont.emoji.EmojiParser;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 
@@ -29,11 +30,12 @@ public class AutoRun {
 
     public void bannedWordsCheck(Message message) {
 
-        String rawContent = message.getContentRaw();
-
         if (allowedPeople.contains(message.getAuthor().getIdLong())) {
             return;
         }
+
+        // This unreadable piece of crap removes all the emojis
+        String rawContent = EmojiParser.removeAllEmojis(EmojiParser.parseToUnicode(message.getContentRaw()));
 
         StringBuilder normalizedMessage = new StringBuilder();
         Map<Character, Character> leetSpeakMap = Map.of(
@@ -47,7 +49,6 @@ public class AutoRun {
         }
 
 
-        // Remove non-alphabetic/digital characters
         for (char ch : rawContent.toCharArray()) {
             if (Character.isAlphabetic(ch)) {
                 normalizedMessage.append(ch);
@@ -58,7 +59,6 @@ public class AutoRun {
         }
 
 
-        // Delete the possible banned message
         for (String banned : bannedWords) {
             if (normalizedMessage.toString().toLowerCase().contains(banned)) {
                 message.delete().queue();
