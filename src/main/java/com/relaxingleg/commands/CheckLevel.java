@@ -24,7 +24,7 @@ public class CheckLevel implements ICommand {
 
     @Override
     public List<OptionData> getOptions() {
-        return List.of(new OptionData(OptionType.USER, "user", "Specify a user", true));
+        return List.of(new OptionData(OptionType.USER, "user", "Specify a user", false));
     }
 
     @Override
