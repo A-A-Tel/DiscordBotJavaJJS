@@ -30,7 +30,7 @@ public class CommandManager extends ListenerAdapter {
     }
 
     @Override
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         for (ICommand command : commands) {
             if (command.getName().equals(event.getName())) {
                 command.execute(event);
