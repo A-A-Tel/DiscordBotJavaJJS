@@ -3,7 +3,6 @@ package com.relaxingleg.commands;
 import com.relaxingleg.ICommand;
 import com.relaxingleg.leveling.LeveledUser;
 import com.relaxingleg.leveling.LevelingMain;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -24,7 +23,7 @@ public class CheckLevel implements ICommand {
 
     @Override
     public List<OptionData> getOptions() {
-        return List.of(new OptionData(OptionType.USER, "user", "Specify a user", false));
+        return List.of(new OptionData(OptionType.MENTIONABLE, "user", "Specify a user", false));
     }
 
     @Override
