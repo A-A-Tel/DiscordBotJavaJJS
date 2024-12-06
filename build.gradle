@@ -18,10 +18,12 @@ version = '1.0'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     implementation("net.dv8tion:JDA:5.2.1")
     implementation('com.google.code.gson:gson:2.10.1')
     implementation("com.vdurmont:emoji-java:5.1.1")
+    implementation 'com.github.sedmelluq.jda-nas:jda-nas:master'
 }
